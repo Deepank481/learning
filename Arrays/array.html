@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul id="ingredients"></ul>
+    <script>
+      const ingredients = [
+        "eggs",
+        "milk",
+        "cheese",
+        "garlic",
+        "onion",
+        "kale",
+        "salt",
+        "pepper",
+      ];
+
+      let listItems = ingredients
+        .map((singleIngredients) => `<li>${singleIngredients}</li>`)
+        .join("");
+      /*
+        uses the map() function to create an array of list item elements, and then it uses the join() 
+        function to join the elements together. The join() function takes a character to use to separate 
+        the items and returns a string. In this case, I used an empty string to join the elements, which 
+        creates a string with all list items joined together.  
+
+        the join() function is just tacked to the end of the call to map(). This is called chaining
+        function calls. The result of the map() function, in this case, gets passed to the join() function.
+        */
+      document.getElementById("ingredients").innerHTML = listItems;
+      console.log(ingredients);
+      ingredients.pop();
+      console.log(ingredients);
+      ingredients.push("chili flakes");
+      console.log(ingredients);
+      ingredients.shift();
+      console.log(ingredients);
+      ingredients.unshift("eggs");
+      console.log(ingredients);
+      console.log(ingredients.slice(3, 6));
+      const produce = ingredients.splice(3, 3);
+      console.log(ingredients);
+
+      //Reducer Function
+      let prices = [4.99, 3, 98, 54.99];
+      let total = 0;
+      total = prices.reduce(function (previousValue, currentValue) {
+        return previousValue + currentValue;
+      });
+      console.log(total);
+
+      //Using filter method in the array
+      const animalNames = [
+        "aardvark",
+        "alligator",
+        "alpaca",
+        "bear",
+        "beaver",
+        "cat",
+        "dog",
+        "elephant",
+      ];
+      const animalStartingWithA = animalNames.filter((animal) =>
+        animal.startsWith("a")
+      );
+      console.log(animalStartingWithA);
+
+      //Destructuring Array
+      let [ani1, ani2, ani3] = animalNames;
+      console.log(ani1, ani2, ani3);
+
+      //Spreading Array
+      const firstArray = ["a", "b", "c", "d"];
+      const secondArray = [...firstArray, "e"];
+      console.log(firstArray);
+      console.log(secondArray);
+    </script>
+  </body>
+</html>
