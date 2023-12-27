@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      //using function hoisting
+      hollaAmigo("Deepank");
+      //using rest parameter
+      function mathOperation(opCode, ...items) {
+        let total = 0;
+        if (opCode === "+") {
+          for (let item of items) {
+            total += item;
+          }
+        } else if (opCode === "*") {
+          total = 1;
+          for (let item of items) {
+            total *= item;
+          }
+        } else {
+          return "Invalid Operation";
+        }
+        return total;
+      }
+
+      console.log(mathOperation("+", 12, 13));
+      console.log(mathOperation("+", 12, 13, 14));
+      console.log(mathOperation("+", 12, 13, 14, 15));
+      console.log(mathOperation("*", 12, 13));
+      console.log(mathOperation("*", 12, 13, 14));
+
+      //using the argument objects
+      const rootElement = document.getElementById("root");
+      function makeNumberedList() {
+        let numberedList = "<ol>";
+        for (let i = 0; i < arguments.length; i++) {
+          numberedList += `<li>${arguments[i]}</li>`;
+        }
+        numberedList += "</ol>";
+        return numberedList;
+      }
+      rootElement.innerHTML = makeNumberedList(
+        "Pen",
+        "Paper",
+        "Pencil",
+        "Eraser",
+        "Sharpner"
+      );
+
+      //Passing function as argument
+      function greetInSpanish(name) {
+        return `Hola, ${name}`;
+      }
+
+      /*function getUserName(callBack) {
+        let firstName = prompt("Enter your first name");
+        return callBack(firstName);
+      }
+
+      console.log(getUserName(greetInSpanish)); */
+
+      //This function is hoisted
+      function hollaAmigo(name) {
+        console.log(`Hola ${name}`);
+      }
+
+      //Writing a method
+      const myCar = {
+        speed: 0,
+        drive: function (speedLimit) {
+          this.speed = speedLimit;
+          console.log(`Driving at ${this.speed} mph`);
+        },
+      };
+
+      //using call, apply and bind
+      //After the first argument in the apply(), call() and bind() all the other argument are optional.
+      const car = {
+        speed: 0,
+      };
+
+      const truck = {
+        speed: 0,
+      };
+
+      function driveVehicle(speedLimit) {
+        this.speed = speedLimit;
+        console.log(`Driving at ${this.speed} mph`);
+      }
+
+      driveVehicle.call(car, 65);
+      const driveMyTruck = driveVehicle.bind(truck, 80);
+      driveMyTruck();
+
+      driveVehicle.apply(car, [120]);
+
+      //passing function from one object to another
+      const myGreatCar = {
+        speed: 0,
+        operate(speedLimit, callBack) {
+          boundCallBack = callBack.bind(this);
+          boundCallBack(speedLimit);
+          console.log(`mycar is driving at ${this.speed}`);
+        },
+      };
+
+      function driving(speed) {
+        this.speed = speed;
+        console.log(`Start driving at ${this.speed}`);
+      }
+
+      myGreatCar.operate(55, driving);
+
+      //Passing function to a child to change the parent.
+      const bookstore = {
+        books: ["Ulysses", "The Great Gatsby"],
+        displayBookStore() {
+          const bookList = this.books.map((book) => `${book}=>`);
+          console.log(bookList.join(""));
+        },
+        removeTitle: function (title) {
+          let newList = this.books.filter((book) => book !== title);
+          this.books = newList;
+        },
+      };
+      bookstore.displayBookStore();
+      bookstore.removeTitle("Ulysses");
+      bookstore.displayBookStore();
+    </script>
+  </body>
+</html>
