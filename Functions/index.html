@@ -131,6 +131,28 @@
       bookstore.displayBookStore();
       bookstore.removeTitle("Ulysses");
       bookstore.displayBookStore();
+
+      //Method Chaining
+      const robot = {
+        currentActivity: undefined,
+        walk() {
+          this.currentActivity = "Walking";
+          console.log(this.currentActivity);
+          return this;
+        },
+        talk: function () {
+          this.currentActivity = "Talking";
+          console.log(this.currentActivity);
+          return this;
+        },
+        write() {
+          this.currentActivity = "Writing";
+          console.log(this.currentActivity);
+          return this;
+        },
+      };
+
+      console.log(robot.walk().talk().write());
     </script>
   </body>
 </html>
